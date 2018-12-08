@@ -1,8 +1,7 @@
 var index = 0;
 
-var employes = [
+const employees = [
     {
-        index: 1,
         firstName: 'John',
         lastName: 'Doe',
         age: 31,
@@ -10,7 +9,6 @@ var employes = [
         employed: true
     },
     {
-        index: 2,
         firstName: 'Amelia',
         lastName: 'Clark',
         age: 22,
@@ -18,7 +16,6 @@ var employes = [
         employed: true
     },
     {
-        index: 3,
         firstName: 'Jack',
         lastName: 'Jones  ',
         age: 21,
@@ -26,7 +23,6 @@ var employes = [
         employed: false
     },
     {
-        index: 4,
         firstName: 'Olivia',
         lastName: 'Wilde',
         age: 31,
@@ -35,22 +31,54 @@ var employes = [
     },
 ];
 
-function returnTable(array) {
+const getTableHeader = (array) => {
+    const arrayObject = array[0];
+    let tableHeader = '<tr>';
+
+    tableHeader += '<th>index</th>'
+
+    Object.keys(arrayObject).forEach((value) => {
+        tableHeader += '<th>' + value + '</th>'
+    })
+
+    tableHeader += '</tr>'
+
+    return tableHeader;
+}
+
+const returnTable = (array) => {
+    const tableHeaderDOM = document.querySelector('thead');
+    tableHeaderDOM.innerHTML = getTableHeader(array);
     var tableContentDOM = document.querySelector('tbody');
     tableContentDOM.innerHTML = '';
-    employes.forEach(function (value, index) {
-        var contentDOM ='<tr><th scope="row">' + value.index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
+    array.forEach(function (value, index) {
+        index++;
+        var contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
     })
 }
 
-function refreshTable() {
-    returnTable(array);
+const removeMen = () => {
+    var menRemoved = employees.filter((value) => {
+        return value.sex == 'female';
+    })
+    returnTable(menRemoved);
 }
 
-returnTable(employes);
+const removeWomen = () => {
+    var womenRemoved = employees.filter((value) => {
+        return value.sex == 'male';
+    })
+    returnTable(womenRemoved);
+}
 
-function createPerson(firstName, lastName, age, sex, employed) {
+const refreshTable = () => {
+    returnTable(employees);
+}
+
+returnTable(employees);
+
+const createPerson = (firstName, lastName, age, sex, employed) => {
     index++;
     return {
         index: index,

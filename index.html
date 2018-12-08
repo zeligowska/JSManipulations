@@ -10,29 +10,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container container-table">
-        <h1>Employees</h1>
+
         <div class="row mb-5">
-            <div col-12 mt-3>
-                <button class="btn btn-primary float-right" onclick="updateArrayContentDOM();"><i class="fas fa-sync"></i></button>
+            <h1 class="col-12 mb-5">Employees</h1>
+            <div class="buttons col-12">
+                <button class="btn btn-primary float-left" onclick="refreshTable();"><i class="fas fa-sync"></i></button>
+                <button class="btn btn-danger float-left" onclick="removeMen();">Remove men</button>
+                <button class="btn btn-danger float-left" onclick="removeWomen();">Remove women</button>
             </div>
         </div>
         <div class="row mb-5">
             <div class="col-12">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th scope="col">index</th>
-                            <th scope="col">firstName</th>
-                            <th scope="col">lastName</th>
-                            <th scope="col">age</th>
-                            <th scope="col">sex</th>
-                            <th scope="col">employed</th>
-                        </tr>
                     </thead>
                     <tbody>
 
