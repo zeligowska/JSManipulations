@@ -23,6 +23,7 @@
                 <button class="btn btn-primary float-left" onclick="refreshTable();"><i class="fas fa-sync"></i></button>
                 <button class="btn btn-danger float-left" onclick="removeMen();">Remove men</button>
                 <button class="btn btn-danger float-left" onclick="removeWomen();">Remove women</button>
+                <button class="btn btn-success float-left" data-toggle="modal" data-target="#exampleModal">Add employee</button>
             </div>
         </div>
         <div class="row mb-5">
@@ -34,6 +35,54 @@
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="employee-name" class="col-form-label">First name:</label>
+                            <input type="text" class="form-control" id="employee-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-last-name" class="col-form-label">Last name:</label>
+                            <input type="text" class="form-control" id="employee-last-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-age" class="col-form-label">Age:</label>
+                            <input type="text" class="form-control" id="employee-age">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-sex">Sex</label>
+                            <select class="form-control" id="employee-sex">
+                                <option>female</option>
+                                <option>male</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value='false' id="employedCheck">
+                            <label class="form-check-label" for="employedCheck">
+                                Employed
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="addEmployee()" data-dismiss="modal">Add</button>
+                </div>
             </div>
         </div>
     </div>

@@ -55,9 +55,10 @@ const returnTable = (array) => {
         index++;
         if(value.employed == true) {
             value.employed = '<i class="fa fa-check"></i>';
-        } else {
+        };
+        if(value.employed == false) {
             value.employed = '<i class="fa fa-times"></i>';
-        }
+        };
         var contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
     })
@@ -83,14 +84,19 @@ const refreshTable = () => {
 
 returnTable(employees);
 
-const createPerson = (firstName, lastName, age, sex, employed) => {
-    index++;
-    return {
-        index: index,
-        firstName: firstName,
-        lastName: lastName,
-        age: age,
-        sex: sex,
-        employed: employed,
+const addEmployee = () => {
+    const inputName = document.getElementById('employee-name').value;
+    const inputLastName = document.getElementById('employee-last-name').value;
+    const inputAge = document.getElementById('employee-age').value;
+    const inputSex = document.getElementById('employee-sex').value;
+    let isEmployed = document.getElementById('employedCheck').checked;
+    const newEmployee = {
+        firstName: inputName,
+        lastName: inputLastName,
+        age: inputAge,
+        sex: inputSex,
+        employed: isEmployed
     }
+    employees.push(newEmployee);
+    refreshTable();
 }
