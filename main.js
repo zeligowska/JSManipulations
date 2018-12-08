@@ -53,6 +53,11 @@ const returnTable = (array) => {
     tableContentDOM.innerHTML = '';
     array.forEach(function (value, index) {
         index++;
+        if(value.employed == true) {
+            value.employed = '<i class="fa fa-check"></i>';
+        } else {
+            value.employed = '<i class="fa fa-times"></i>';
+        }
         var contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
     })
