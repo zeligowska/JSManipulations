@@ -1,6 +1,6 @@
 var index = 0;
 
-const employees = [
+var employees = [
     {
         firstName: 'John',
         lastName: 'Doe',
@@ -49,6 +49,7 @@ const getTableHeader = (array) => {
 const returnTable = (array) => {
     const tableHeaderDOM = document.querySelector('thead');
     tableHeaderDOM.innerHTML = getTableHeader(array);
+
     var tableContentDOM = document.querySelector('tbody');
     tableContentDOM.innerHTML = '';
     array.forEach(function (value, index) {
@@ -59,9 +60,26 @@ const returnTable = (array) => {
         if(value.employed == false) {
             value.employed = '<i class="fa fa-times"></i>';
         };
-        var contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
+        let contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
+        value.index = index;
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
+        localStorage.setItem(index, JSON.stringify(value));
     })
+}
+
+const getTable = () => {
+    const tableHeaderDOM = document.querySelector('thead');
+    tableHeaderDOM.innerHTML = getTableHeader(employees);
+
+    var tableContentDOM = document.querySelector('tbody');
+    tableContentDOM.innerHTML = '';
+    const localEmployees = [];
+    for(let i=1; i<=localStorage.length; i++) {
+        let localEmployee = JSON.parse(localStorage[i]);
+        localEmployees.push(localEmployee);
+    }
+    employees = localEmployees;
+    refreshTable();
 }
 
 const removeMen = () => {
@@ -82,8 +100,6 @@ const refreshTable = () => {
     returnTable(employees);
 }
 
-returnTable(employees);
-
 const addEmployee = () => {
     const inputName = document.getElementById('employee-name').value;
     const inputLastName = document.getElementById('employee-last-name').value;
@@ -95,8 +111,12 @@ const addEmployee = () => {
         lastName: inputLastName,
         age: inputAge,
         sex: inputSex,
-        employed: isEmployed
+        employed: isEmployed,
+        index: index
     }
+    index++;
     employees.push(newEmployee);
     refreshTable();
 }
+
+getTable();
