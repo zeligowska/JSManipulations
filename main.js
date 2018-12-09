@@ -61,7 +61,7 @@ const returnTable = (array) => {
             value.employed = '<i class="fa fa-times"></i>';
         };
         let contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
-        value.index = index;
+        //value.index = index;
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
         localStorage.setItem(index, JSON.stringify(value));
     })
@@ -112,11 +112,12 @@ const addEmployee = () => {
         age: inputAge,
         sex: inputSex,
         employed: isEmployed,
-        index: index
+        //index: index
     }
-    index++;
+    //index++;
     employees.push(newEmployee);
     refreshTable();
 }
 
+refreshTable();
 getTable();
