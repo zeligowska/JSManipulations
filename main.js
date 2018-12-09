@@ -41,7 +41,7 @@ const getTableHeader = (array) => {
         tableHeader += '<th>' + value + '</th>'
     })
 
-    tableHeader += '</tr>'
+    tableHeader += '<th> </th></tr>'
 
     return tableHeader;
 }
@@ -54,14 +54,13 @@ const returnTable = (array) => {
     tableContentDOM.innerHTML = '';
     array.forEach(function (value, index) {
         index++;
-        if(value.employed == true) {
+        if (value.employed == true) {
             value.employed = '<i class="fa fa-check"></i>';
         };
-        if(value.employed == false) {
+        if (value.employed == false) {
             value.employed = '<i class="fa fa-times"></i>';
         };
-        let contentDOM ='<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td></tr>';
-        //value.index = index;
+        let contentDOM = '<tr><th scope="row">' + index + '</th><td>' + value.firstName + '</td><td>' + value.lastName + '</td><td>' + value.age + '</td><td>' + value.sex + '</td><td>' + value.employed + '</td><td><button class="btn btn-danger float-left" onclick="deleteEmployee(' + index + ');"><i class="fa fa-times"></i></button></td></tr>';
         tableContentDOM.insertAdjacentHTML('beforeend', contentDOM);
         localStorage.setItem(index, JSON.stringify(value));
     })
@@ -74,7 +73,7 @@ const getTable = () => {
     var tableContentDOM = document.querySelector('tbody');
     tableContentDOM.innerHTML = '';
     const localEmployees = [];
-    for(let i=1; i<=localStorage.length; i++) {
+    for (let i = 1; i <= localStorage.length; i++) {
         let localEmployee = JSON.parse(localStorage[i]);
         localEmployees.push(localEmployee);
     }
@@ -96,6 +95,17 @@ const removeWomen = () => {
     returnTable(womenRemoved);
 }
 
+const deleteEmployee = (index) => {
+    employees.splice(index-1, 1);
+    //localStorage.removeItem(index);
+    for(let i=index; i<=localStorage.length; i++) {
+        localStorage.setItem(i, localStorage[i+1]);
+    }
+    localStorage.removeItem(localStorage.length);
+    getTable();
+    refreshTable();
+}
+
 const refreshTable = () => {
     returnTable(employees);
 }
@@ -112,12 +122,9 @@ const addEmployee = () => {
         age: inputAge,
         sex: inputSex,
         employed: isEmployed,
-        //index: index
     }
-    //index++;
     employees.push(newEmployee);
     refreshTable();
 }
-
-refreshTable();
 getTable();
+refreshTable();
